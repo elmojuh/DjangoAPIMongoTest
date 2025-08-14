@@ -9,7 +9,7 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     volumes:
-      - .:/api
+      - .:/animals_api
     command: python manage.py runserver 0.0.0.0:5000
   db:
       image: mongo:latest
