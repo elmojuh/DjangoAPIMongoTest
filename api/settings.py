@@ -19,11 +19,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ROOT_URLCONF = 'api.urls'
+ROOT_URLCONF = 'api'
 
 TEMPLATES = []
 
-WSGI_APPLICATION = 'api.wsgi.application'
+WSGI_APPLICATION = 'api.application'
 
 DATABASES = {}  # não usaremos DB do Django
 
