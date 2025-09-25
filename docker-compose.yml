@@ -8,17 +8,27 @@ services:
       - db
     environment:
       - PYTHONUNBUFFERED=1
+      - SECRET_KEY=secret-key-para-docker
+      - DEBUG=False
+      - MONGO_HOST=db
+      - MONGO_USER=root
+      - MONGO_PASSWORD=senha-forte-docker
+      - MONGO_DB=animal_db
     volumes:
       - .:/animals_api
     command: python manage.py runserver 0.0.0.0:5000
+
   db:
-      image: mongo:latest
-      hostname: test_mongodb
-      environment:
-        - MONGO_INITDB_DATABASE=animal_db
-        - MONGO_INITDB_ROOT_USERNAME=root
-        - MONGO_INITDB_ROOT_PASSWORD=pass
-      volumes:
-        - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
-      ports:
-        - 27017:27017
+    image: mongo:latest
+    container_name: djangoapimongotest-db-1
+    ports:
+      - "27017:27017"
+    hostname: test_mongodb
+    environment:
+      MONGO_INITDB_DATABASE: animal_db
+    volumes:
+      - mongo_data:/data/db
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+      
+volumes:
+  mongo_data:
